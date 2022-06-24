@@ -1,0 +1,17 @@
+.navBar{
+    height: 100px;
+    background-color: #1C79CF;
+}
+.navBarList{
+    list-style: none;
+    display: flex;
+    justify-content: center;
+}
+.navBarList > li{
+    color: aliceblue;
+    margin: 25px;
+}
+.movieIcon{
+  padding-top: 0.5em;
+    color: aliceblue;
+}
