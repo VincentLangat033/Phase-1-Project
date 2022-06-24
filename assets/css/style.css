@@ -15,3 +15,13 @@
   padding-top: 0.5em;
     color: aliceblue;
 }
+.sideNavBar{
+    padding-top: 1.0em;
+    background-color: #D9D9D9;
+    /* height: 150px; */
+    width: 20%;
+}
+.contentBody{
+    display: flex;
+    height: 500px;
+}
