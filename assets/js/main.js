@@ -1,78 +1,66 @@
-// document.addEventListener('DOMContentLoaded',function(){
-//     // alert('Movies-Zangu says: Welcome to my page!')
 
-//     fetch('https://api.themoviedb.org/3/movie/popular?api_key=50b389526ca9b840b2cef75d8b8f512e')
-//     .then(res=>res.json())
-//     .then(data =>{
-//         // data.forEach(movies=>{
-//             console.log(data)
-//         // })
-//     })
-// })
-
-
-//api link
-//https://api.themoviedb.org/3
-
-// most popular
-// https://api.themoviedb.org/3/movie/popular?
-
-
-// apikey
-//api_key=50b389526ca9b840b2cef75d8b8f512e
-
-// const API_URL
-//https://api.themoviedb.org/3/movie/popular?api_key=50b389526ca9b840b2cef75d8b8f512e
-
-//const IMAGE_Path
-//https://image.tmdb.org/t/p/1280/
-
-// const searchUrl
-//https://api.themoviedb.org/3/search/movie?api_key=50b389526ca9b840b2cef75d8b8f512e
-
-const API_URL ='https://api.themoviedb.org/3/movie/popular?api_key=50b389526ca9b840b2cef75d8b8f512e'
-const IMAGE_Path = 'https://image.tmdb.org/t/p/1280/'
-const SEARCH_URL ='https://api.themoviedb.org/3/search/movie?api_key=50b389526ca9b840b2cef75d8b8f512e'
-const form = document.querySelector('.form')
-const search = document.getElementsByClassName('search')
-const main = document.getElementsByClassName('main')
-
-fetchMovies(API_URL)
- async  function fetchMovies(url){
-     const res = await fetch(url);
-     const data = await res.json();
-     displayMovies(data.results)
-     console.log(data.results)
-
-}
-function displayMovies(movies){
-    main.innerHTML = ''
-
-    movies.forEach(movie=>{
-        const {title,poster_path,vote_average,overview}= movie
-        //create a div in main 
-        //first delete the existing placeholders
-        const moviesElement = document.createElement('div')//.className= 'movie' //then give the div a className
-        moviesElement.classList.add('movie') //classname of movie
-        //first add elements of the div to the div before appending to the main element
-        moviesElement.innerHTML = `
-        <img src="${IMAGE_Path + poster_path} alt ="${title}" />
-        <div class="movieInfo" >
-        <h3>${title} </h3>
-        <span class="${getClassesByRating(vote_average)}"> ${vote_average}</span>  
-        </div>
-        <div class ="overView"> 
-        <h3> Overview</h3>
-        ${overview}
-
-        </div>
-        `
-        moviesElement
-        main.appendChild(moviesElement)
-    })
+document.addEventListener('DOMContentLoaded',function(e){
+    e.preventDefault;
     
-}
 
+
+// const API_KEY = 'api_key=1cf50e6248dc270629e802686245c2c8';
+const API_URL ='https://api.themoviedb.org/3/movie/popular?api_key=50b389526ca9b840b2cef75d8b8f512e'
+const IMAGE_PATH = 'https://image.tmdb.org/t/p/w500'
+const SEARCH_URL ='https://api.themoviedb.org/3/search/movie?api_key=50b389526ca9b840b2cef75d8b8f512e'
+const form = document.getElementById('form')
+const search = document.getElementById('search')
+const main= document.getElementById('main')
+
+//function to displayMovies
+
+getMovies(API_URL)
+ async function getMovies(url){
+
+    fetch(url)
+    .then(res=>res.json())
+    .then(data=>{
+        displayMovies(data.results)
+        console.log(data.results)
+    })
+  
+ }
+function displayMovies(movies){
+ main.innerHTML =''
+ movies.forEach((movie)=>{
+  
+    const moviesElement=document.createElement('div')
+    moviesElement.classList.add('movie')
+    
+     const img = document.createElement('img')
+     img.src =  `${IMAGE_PATH}${movie.poster_path}`
+     const div = document.createElement('div')
+     div.classList.add('movie-info')
+    const h3 = document.createElement('h3')
+    h3.innerText = movie.title
+    const span = document.createElement('span')
+    span.classList.add('green')
+    span.innerText = movie.vote_average
+    div.appendChild(h3)
+    div.appendChild(span)
+    const div1 = document.createElement('div')
+    div1.classList.add('overview')
+    const h31= document.createElement('h3')
+    h31.innerText = movie.overview
+    div1.appendChild(h31)
+    moviesElement.appendChild(img)
+    moviesElement.appendChild(div)
+    moviesElement.appendChild(div1)
+
+
+   
+  
+    
+     main.appendChild(moviesElement)
+      
+ })
+
+}
 function getClassesByRating(rating){
     if(rating>=8){
         return 'green'
@@ -82,15 +70,22 @@ function getClassesByRating(rating){
         return 'red'
     }
 }
-
 form.addEventListener('submit', (e)=>{
-    e.preventDefault;
-    const searchValue = search.value;
-    if(searchValue && searchValue !==''){
-        fetchMovies(SEARCH_URL + searchValue)
-        searchValue = ''
-    }else{
-        window.location.reload()
-        //we want it to reload
-    }
+     e.preventDefault;
+     let searchValue = search.value
+     if(searchValue && searchValue !== ''){
+         //concatenate with a forward slash
+         getMovies(SEARCH_URL + '%query=' + searchValue)
+        // getMovies(API_URL)
+         searchValue=''
+     }else{
+         window.location.reload()
+     }
+ })
+
+ //implementing post method
+ //https://api.themoviedb.org/3/movie/{movie_id}/rating?api_key=<<api_key>>
+
+
+
 })
