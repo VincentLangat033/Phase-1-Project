@@ -25,3 +25,69 @@
     display: flex;
     height: 500px;
 }
+.footer{
+    height: 50px;
+    background-color: #1C79CF;
+    color: aliceblue;
+    text-align: center;
+}
+.form{
+    background-color: transparent;
+    /* border: 1px solid(blue); */
+    border-radius: 30px;
+}
+.main{
+    display: flex;
+    flex-wrap: wrap;
+}
+.movie{
+    width: 250px;
+    margin: 1rem;
+    background-color: #1C79CF;
+    box-shadow: 0 4px 5px rgba(0,0,0,0.2);
+    position: relative;
+    overflow: hidden;
+    border-radius: 3px;
+}
+.movie img{
+    width: 100%;
+}
+.movieInfo{
+    color: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1rem 1rem;
+    letter-spacing: 1px;
+}
+.movieInfo span{
+    padding: 0.25rem 0.5rem;
+    border-radius: 3px;
+    font-weight: bold;
+}
+.movieInfo span.green{
+    color: lightgreen;
+}
+.movieInfo span.orange{
+    color: orange;
+}
+.movieInfo span.red{
+    color: red
+}
+.overView{
+    color: black;
+    background-color:white;
+    padding: 2rem;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    max-height: 95%;
+    /* to transform the overview text */
+    transform: translateY(101%);
+     transition: 0.3s ease;  /*transitioning it to ease */
+}
+.movie:hover .overView{
+    transform: translateY(0);
+
+}
