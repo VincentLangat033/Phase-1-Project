@@ -1,8 +1,6 @@
 
 document.addEventListener('DOMContentLoaded',function(e){
     e.preventDefault;
-    
-
 
 // const API_KEY = 'api_key=1cf50e6248dc270629e802686245c2c8';
 const API_URL ='https://api.themoviedb.org/3/movie/popular?api_key=50b389526ca9b840b2cef75d8b8f512e'
@@ -39,7 +37,7 @@ function displayMovies(movies){
     const h3 = document.createElement('h3')
     h3.innerText = movie.title
     const span = document.createElement('span')
-    span.classList.add('green')
+    span.classList.add(getClassesByRating())
     span.innerText = movie.vote_average
     div.appendChild(h3)
     div.appendChild(span)
@@ -47,16 +45,25 @@ function displayMovies(movies){
     div1.classList.add('overview')
     const h31= document.createElement('h3')
     h31.innerText = movie.overview
+    const button = document.createElement('button')
+    button.classList.add('updateRatingButton')
+    button.innerText = 'Update Rating'
     div1.appendChild(h31)
+    div1.appendChild(button)
     moviesElement.appendChild(img)
     moviesElement.appendChild(div)
     moviesElement.appendChild(div1)
+    main.appendChild(moviesElement)
 
 
-   
+// add an eventlistener to the button we created
+button.addEventListener('click',()=>{
+    alert('New Ratings will be posted')
+    updateRating()
+})
+
+
   
-    
-     main.appendChild(moviesElement)
       
  })
 
@@ -86,6 +93,24 @@ form.addEventListener('submit', (e)=>{
  //implementing post method
  //https://api.themoviedb.org/3/movie/{movie_id}/rating?api_key=<<api_key>>
 
+ function updateRating(movies){
+     fetch('url',
+     {
+         method: 'POST',
+         headers: {
+             'Content-type': 'application/json'
+         },
+         body: JSON.stringify(movies)
+
+     })
+     .then(res=> res.json())
+     .then(data =>console.log(data))
+ }
+
+const newMovies =document.getElementById('newMovies')
+newMovies.addEventListener('click', ()=>{
+    console.log('New Movies will be posted soon!')
+})
 
 
 })
