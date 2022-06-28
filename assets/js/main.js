@@ -14,6 +14,7 @@ const search = document.getElementById('search')
 const main= document.getElementById('main')
 const tagsElement = document.getElementById('tags');
 
+
 // An array of sample genres I would like to display
 const genres = [
     {
@@ -151,7 +152,7 @@ function getMovies(url){
     .then(res=>res.json())
     .then(data=>{
         displayMovies(data.results)
-        // console.log(data.results)
+        console.log(data.results)
     })
   
  }
@@ -180,10 +181,19 @@ function displayMovies(movies){
     const h31= document.createElement('h3')
     h31.innerText = movie.overview
     const button = document.createElement('button')
-    button.classList.add('updateRatingButton')
-    button.innerText = 'Update Rating'
+    const myRatingFormDiv =document.createElement('div')
+    myRatingFormDiv.innerHTML =`
+    <br>
+    <form action="#" class="myRatingForm" id ="myRatingForm">
+    <input type="text" placeholder ="Your Rating" class="yourRating" id="yourRating" >  <br>
+    <button type="submit" name="Your Rating" id="buttonRating" value="Updating Rating"> <br>
+    </form>
+    `
+    button.classList.add('updateRatingButtonDiv')
+    button.innerText = 'Input your Rating'
     div1.appendChild(h31)
     div1.appendChild(button)
+    div1.appendChild(myRatingFormDiv)
     moviesElement.appendChild(img)
     moviesElement.appendChild(div)
     moviesElement.appendChild(div1)
@@ -194,7 +204,17 @@ function displayMovies(movies){
 button.addEventListener('click',()=>{
     alert('New Ratings will be posted')
     updateRating()
-})    
+})
+const myRatingForm = document.getElementById('myRatingForm')
+ myRatingForm.addEventListener('submit', handleRating)
+ function handleRating(e){
+     e.preventDefault;
+    //  let ratingObject = {value: e.target.yourRating.value}
+      alert('JS')
+      
+
+
+ }    
  })
 }
 function getClassesByRating(rating){
@@ -223,6 +243,7 @@ form.addEventListener('submit', (e)=>{
  //https://api.themoviedb.org/3/movie/{movie_id}/rating?api_key=<<api_key>>
 
  function updateRating(movies){
+//
      fetch('url',
      {
          method: 'POST',
@@ -235,6 +256,17 @@ form.addEventListener('submit', (e)=>{
      .then(res=> res.json())
      .then(data =>console.log(data))
  }
+ const myRatingForm = document.getElementById('myRatingForm')
+ myRatingForm.addEventListener('submit', handleRating)
+ function handleRating(e){
+     e.preventDefault;
+    //  let ratingObject = {value: e.target.yourRating.value}
+      alert('JS')
+      
+
+
+ }
+
 
 const newMovies =document.getElementById('newMovies')
 newMovies.addEventListener('click', ()=>{
