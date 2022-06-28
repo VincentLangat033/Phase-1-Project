@@ -2,29 +2,163 @@
 document.addEventListener('DOMContentLoaded',function(e){
     e.preventDefault;
 
-// const API_KEY = 'api_key=1cf50e6248dc270629e802686245c2c8';
+//variable declarations
 const API_URL ='https://api.themoviedb.org/3/movie/popular?api_key=50b389526ca9b840b2cef75d8b8f512e'
 const IMAGE_PATH = 'https://image.tmdb.org/t/p/w500'
 const SEARCH_URL ='https://api.themoviedb.org/3/search/movie?api_key=50b389526ca9b840b2cef75d8b8f512e'
+const API_KEY = 'api_key=50b389526ca9b840b2cef75d8b8f512e';
+const BASE_URL = 'https://api.themoviedb.org/3';
+const GENRE_URL = BASE_URL + '/discover/movie?sort_by=popularity.desc&'+API_KEY;
 const form = document.getElementById('form')
 const search = document.getElementById('search')
 const main= document.getElementById('main')
+const tagsElement = document.getElementById('tags');
+
+// An array of sample genres I would like to display
+const genres = [
+    {
+      "id": 80,
+      "name": "Crime"
+    },
+    {
+      "id": 99,
+      "name": "Documentary"
+    },
+    {
+      "id": 18,
+      "name": "Drama"
+    },
+  
+    {
+      "id": 36,
+      "name": "History"
+    },
+    {
+      "id": 27,
+      "name": "Horror"
+    },
+    {
+      "id": 10402,
+      "name": "Music"
+    },
+    {
+      "id": 9648,
+      "name": "Mystery"
+    },
+    {
+      "id": 10749,
+      "name": "Romance"
+    },
+    {
+      "id": 878,
+      "name": "Science Fiction"
+    },
+    {
+      "id": 10770,
+      "name": "TV Movie"
+    },
+    {
+      "id": 53,
+      "name": "Thriller"
+    },
+    {
+      "id": 10752,
+      "name": "War"
+    },
+    {
+      "id": 37,
+      "name": "Western"
+    }
+  ]
+
+//inititalize a selectedGenre as an empty array so that upon selection you can push elements to the array
+let selectedGenre = []
+//setGenre() calls our function/ invoking a function and this function has been hoisted
+setGenre();
+function setGenre() {
+    //setting  iinerHtml to an empty string clears the previously displayed content in the DOM
+    tagsElement.innerHTML= '';
+    //iterates over our const genres array declared above then creates a new DIV
+    genres.forEach(genre => {
+        const genreTag = document.createElement('div');
+        //give the div a classname of tag (to style in the css)
+        genreTag.classList.add('tag');
+        genreTag.id=genre.id;
+        genreTag.innerText = genre.name;
+        genreTag.addEventListener('click', () => {
+            if(selectedGenre.length == 0){
+                selectedGenre.push(genre.id);
+            }else{
+                if(selectedGenre.includes(genre.id)){
+                    selectedGenre.forEach((id, idx) => {
+                        if(id == genre.id){
+                            selectedGenre.splice(idx, 1);
+                        }
+                    })
+                }else{
+                    selectedGenre.push(genre.id);
+                }
+            }
+            // console.log(selectedGenre) used to check any errors
+        
+            getMovies(GENRE_URL + '&with_genres='+encodeURI(selectedGenre.join(',')))
+            highlightSelection()
+        })
+        tagsElement.append(genreTag);
+    })
+}
+//function to check the highlighted selection
+function highlightSelection() {
+    const tags = document.querySelectorAll('.tag');
+    tags.forEach(tag => {
+        tag.classList.remove('highlight')
+    })
+    clearBtn()
+    if(selectedGenre.length !=0){   
+        selectedGenre.forEach(id => {
+            const hightlightedTag = document.getElementById(id);
+            hightlightedTag.classList.add('highlight');
+        })
+    }
+
+}
+// function to clear button when selected
+function clearBtn(){
+    let clearBtn = document.getElementById('clear');
+    if(clearBtn){
+        clearBtn.classList.add('highlight')
+    }else{
+            
+        let clear = document.createElement('div');
+        clear.classList.add('tag','highlight');
+        clear.id = 'clear';
+        clear.innerText = 'Clear Filter';
+        clear.addEventListener('click', () => {
+            selectedGenre = [];
+            setGenre();            
+            getMovies(API_URL);
+        })
+        tagsElement.append(clear);
+    }
+    
+}
 
 //function to displayMovies
-
 getMovies(API_URL)
- async function getMovies(url){
+function getMovies(url){
 
     fetch(url)
     .then(res=>res.json())
     .then(data=>{
         displayMovies(data.results)
-        console.log(data.results)
+        // console.log(data.results)
     })
   
  }
 function displayMovies(movies){
+    //innerHTMl = ''clears previously  appended content
  main.innerHTML =''
+ //iterate over the movies so as to pass their values. image,voteavarage,title
  movies.forEach((movie)=>{
   
     const moviesElement=document.createElement('div')
@@ -60,13 +194,8 @@ function displayMovies(movies){
 button.addEventListener('click',()=>{
     alert('New Ratings will be posted')
     updateRating()
-})
-
-
-  
-      
+})    
  })
-
 }
 function getClassesByRating(rating){
     if(rating>=8){
@@ -79,12 +208,12 @@ function getClassesByRating(rating){
 }
 form.addEventListener('submit', (e)=>{
      e.preventDefault;
-     let searchValue = search.value
+      searchValue = search.value
      if(searchValue && searchValue !== ''){
          //concatenate with a forward slash
          getMovies(SEARCH_URL + '%query=' + searchValue)
         // getMovies(API_URL)
-         searchValue=''
+         searchValue='' //after search value is achieved, clear the value
      }else{
          window.location.reload()
      }
