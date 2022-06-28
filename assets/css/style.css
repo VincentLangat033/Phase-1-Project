@@ -116,3 +116,23 @@ a{
 .updateRatingButton{
     margin-top: 1.0em;
 }
+#tags{
+    width:80%;
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto;
+}
+.tag{
+    color:white;
+    padding:10px 20px;
+    background-color: #1C79CF;
+    border-radius: 50px;
+    margin:5px;
+    display:inline-block;
+    cursor: pointer;
+}
+.tag.highlight{
+    background-color: red;
+}
