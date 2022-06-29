@@ -40,7 +40,7 @@ This website has been hosted remotely and you can access it on gh-pages via this
 ## Original Layout
 
 
-<img src="assets/images/movies-zangu.png" alt="">
+<img src="assets/images/moviezangufinal.png" alt="">
 
 
 ## License
