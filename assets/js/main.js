@@ -3,10 +3,12 @@ document.addEventListener('DOMContentLoaded',function(e){
     e.preventDefault;
 
 //variable declarations
+const API_URL1 = 'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=f4726bbe13ac95e896f3571c43f3519f&page=1'
 const API_URL ='https://api.themoviedb.org/3/movie/popular?api_key=50b389526ca9b840b2cef75d8b8f512e'
 const IMAGE_PATH = 'https://image.tmdb.org/t/p/w500'
 const SEARCH_URL ='https://api.themoviedb.org/3/search/movie?api_key=50b389526ca9b840b2cef75d8b8f512e'
-const API_KEY = 'api_key=50b389526ca9b840b2cef75d8b8f512e';
+const API_KEY = 'api_key=f4726bbe13ac95e896f3571c43f3519f';
+// const API_KEY = 'api_key=50b389526ca9b840b2cef75d8b8f512e';
 const BASE_URL = 'https://api.themoviedb.org/3';
 const GENRE_URL = BASE_URL + '/discover/movie?sort_by=popularity.desc&'+API_KEY;
 const form = document.getElementById('form')
@@ -152,6 +154,7 @@ function getMovies(url){
     .then(res=>res.json())
     .then(data=>{
         displayMovies(data.results)
+        // fetchurl(data.results)
         console.log(data.results)
     })
   
@@ -274,4 +277,8 @@ newMovies.addEventListener('click', ()=>{
 })
 
 
+
+
 })
+
+
