@@ -1,97 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/css/style.css">
-    <title>Document</title>
+	<title>Sign up / Login</title>
+	<link rel="stylesheet" type="text/css" href="css/index.css">
 </head>
 <body>
-    <div class="navBar">
-        <div class="movieIcon">Movies-Zangu</div>
-        <nav class="navBarEl">
-            <ul class="navBarList">
-                <li><a href="./index.html">Home</a></li>
-                <li> <a href="#" id="newMovies">New</a> </li>
-                <li><a href="./index.html">Popular Movies</a></li>
-                <form action="#" class="form" id="form"> 
-                    <input type="text" placeholder="Enter Movie Name" class="search">
-                </form>
-               
-            </ul>
-         
-        </nav>
+	<div class="container">
+		<div class="form-container">
+			<h1>Sign up</h1>
+			<form>
+				<label for="username">Username:</label>
+				<input type="text" id="username" name="username" placeholder="Enter your username" required>
 
-    </div>
-    <div id="banner">
-        <div id="banner__fadeUp"></div>
-        <div id="banner__contents">
-            <h1 id="banner__title"></h1>
-            <div id="banner__buttons">
-                <button id="banner__button">Play</button>
-                <button id="banner__button">My List</button>
-            </div>
-            <p id="banner__description"></p>
-        </div>
-        <div id="banner__fadeBottom"></div>
-    </div>
+				<label for="email">Email:</label>
+				<input type="email" id="email" name="email" placeholder="Enter your email" required>
 
-    <!-- create a div tag where my movie genres will be appended -->
-    <div id="tags">My Movie genres goes here</div>
-    <main id="main">
-        <div class="movie">
-            <img src="./assets/images/movies-zangu.png" alt="">
-            <div class="movie-info">
-                <h3>Movie title</h3>
-                <span class="green">6.9</span>
-            </div>
-            <div class="overview">
-                <h3>Overview</h3>
-                Lorem ipsum dolor sit amet, 
-                consectetur adipisicing elit. Numquam labore 
-                debitis ab non provident autem eligendi vero, veniam reprehenderit co
-                rporis et sed doloribus molestias, accusamus expedita nemo voluptate doloremque quasi.
-                 <br>
-                <form action="#">
-                    <input type="text" placeholder="Your Rating" class="yourRating" id="yourRating">
-                    <input type="btn" name="Your Rating" id="buttonRating">
-                    <input type="button" value="">
-                </form>
-            </div>
-        </div>
-        <div class="movie">
-            <img src="./assets/images/movies-zangu.png" alt="">
-            <div class="movie-info">
-                <h3>Movie title</h3>
-                <span class="orange">6.9</span>
-            </div>
-            <div class="overview">
-                <h3>Overview</h3>
-                Lorem ipsum dolor sit amet, 
-                consectetur adipisicing elit. Numquam labore 
-                debitis ab non provident autem eligendi vero, veniam reprehenderit co
-                rporis et sed doloribus molestias, accusamus expedita nemo voluptate doloremque quasi.
-            </div>
-        </div>
-        <div class="movie">
-            <img src="./assets/images/movies-zangu.png" alt="">
-            <div class="movie-info">
-                <h3>Movie title</h3>
-                <span class="red">6.9</span>
-            </div>
-            <div class="overview">
-                <h3>Overview</h3>
-                Lorem ipsum dolor sit amet, 
-                consectetur adipisicing elit. Numquam labore 
-                debitis ab non provident autem eligendi vero, veniam reprehenderit co
-                rporis et sed doloribus molestias, accusamus expedita nemo voluptate doloremque quasi.
-            </div>
-        </div>
-    </main>
-    <footer class="footer">
-        <h4>Powered by MoviesZangu</h4>
-    </footer>
-    <script src="./assets/js/main.js"></script>
+				<label for="password">Password:</label>
+				<input type="password" id="password" name="password" placeholder="Enter your password" required>
+
+				<input type="submit" value="Sign up">
+			</form>
+			<br> </br>
+			<h6>Already registered? Click here to logon</h6>
+		</div>
+
+
+	</div>
+
+	<script src="script.js"></script>
 </body>
 </html>
